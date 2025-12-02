@@ -3,13 +3,6 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   const username = localStorage.getItem("userName");
-  const handleLogOut = () => {
-    debugger;
-    localStorage.clear();
-    navigate("/login");
-    toast.success("User Logout");
-  };
-
   return (
     <>
       <card className="flex item-center justify-center m-10 bg-amber-100 mr-7 h-100">

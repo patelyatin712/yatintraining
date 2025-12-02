@@ -18,7 +18,6 @@ function DashBoard() {
   }, [page, minPrice, maxPrice]);
 
   const loadData = async () => {
-    debugger;
     try {
       const result = await axios.get(
         "https://api.freeapi.app/api/v1/public/randomproducts",
@@ -34,7 +33,6 @@ function DashBoard() {
       );
 
       if (result.data.statusCode == "200") {
-        debugger;
         let items = result?.data?.data?.data;
         let itemdata = result?.data?.data?.data;
 
@@ -43,8 +41,6 @@ function DashBoard() {
 
         setData(items);
         setFilter(itemdata);
-
-        // Disable NEXT button if no items found
         setIsDisabled(items.length === 0);
       }
     } catch (err) {
@@ -66,7 +62,6 @@ function DashBoard() {
     }
   };
   const checkNextPage = async () => {
-    debugger;
     try {
       const nextPage = page + 1;
 
@@ -96,130 +91,6 @@ function DashBoard() {
   const uniqCategory = [...new Set(filter?.map((item) => item.category))];
 
   return (
-    //  <>
-    //   <crad className="">
-    //     <div className="col-md-2">
-    //       <label className="block mb-2.5 text-sm font-medium text-heading">
-    //         Min Price
-    //       </label>
-    //       <input
-    //         type="number"
-    //         className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-    //         placeholder="Min"
-    //         value={minPrice}
-    //         onChange={(e) => {
-    //           setMinPrice(e.target.value);
-    //           setPage(1);
-    //         }}
-    //       />
-    //     </div>
-    //     <div className="col-md-2">
-    //       <label className="block mb-2.5 text-sm font-medium text-heading">
-    //         Max Price
-    //       </label>
-    //       <input
-    //         className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-    //         type="number"
-    //         placeholder="Max"
-    //         value={maxPrice}
-    //         onChange={(e) => {
-    //           setMaxPrice(e.target.value);
-    //           setPage(1);
-    //         }}
-    //       />
-    //     </div>
-    //     <div className="col-md-3">
-    //       <label className="form-label">Category</label>
-    //       <select
-    //         className="form-select"
-    //         value={category}
-    //         onChange={(e) => {
-    //           setCategory(e.target.value);
-    //           let filtercetogorys = filter.filter((data) => {
-    //             return data.category === e.target.value;
-    //           });
-    //           console.log(filtercetogorys);
-
-    //           setData(filtercetogorys);
-    //           setPage(1);
-    //         }}
-    //       >
-    //         {uniqCategory.map((product) => {
-    //           return <option value={product.category}>{product}</option>;
-    //         })}
-    //       </select>
-    //     </div>
-    //     <div className="col-md-3">
-    //       <label className="form-label">Search Title</label>
-    //       <input
-    //         onChange={(e) => {
-    //           handleSearch(e.target.value);
-    //           setPage(1);
-    //         }}
-    //       />
-    //     </div>
-
-    //     <table class="table-auto">
-    //       <thead className="table-dark">
-    //         <tr>
-    //           <th style={{ width: "90px" }}>Image</th>
-    //           <th>Title</th>
-    //           <th>Category</th>
-    //           <th>Price (₹)</th>
-    //         </tr>
-    //       </thead>
-
-    //       <tbody>
-    //         {data.length === 0 ? (
-    //           <tr>
-    //             <td colSpan="4" className="text-center py-3">
-    //               No Products Found
-    //             </td>
-    //           </tr>
-    //         ) : (
-    //           data.map((product) => (
-    //             <tr key={product.id}>
-    //               <td>
-    //                 <img
-    //                   src={product?.thumbnail}
-    //                   alt={product.title}
-    //                   className="img-fluid rounded"
-    //                   style={{
-    //                     height: "60px",
-    //                     width: "80px",
-    //                     objectFit: "cover",
-    //                   }}
-    //                 />
-    //               </td>
-    //               <td>{product.title}</td>
-    //               <td>{product.category}</td>
-    //               <td>₹{product.price}</td>
-    //             </tr>
-    //           ))
-    //         )}
-    //       </tbody>
-    //     </table>
-    //     <div className="d-flex justify-content-between mt-3">
-    //       <button
-    //         className="btn btn-primary"
-    //         disabled={page === 1}
-    //         onClick={() => setPage(page - 1)}
-    //       >
-    //         ◀ Prev
-    //       </button>
-
-    //       <span className="fw-bold">Page {page}</span>
-
-    //       <button
-    //         className="btn btn-primary"
-    //         disabled={page === totalPages}
-    //         onClick={incrementPageNumber}
-    //       >
-    //         Next ▶
-    //       </button>
-    //     </div>
-    //   </crad>
-    // </>
     <div className="p-6 bg-black shadow-lg ">
       <div className="bg-white shadow-lg rounded-xl p-6 mb-6">
         <h2 className="text-xl font-semibold mb-4">Filters</h2>
@@ -239,8 +110,6 @@ function DashBoard() {
               }}
             />
           </div>
-
-          {/* Max Price */}
           <div>
             <label className="block text-sm font-medium mb-1">Max Price</label>
             <input
@@ -254,8 +123,6 @@ function DashBoard() {
               }}
             />
           </div>
-
-          {/* Category */}
           <div>
             <label className="block text-sm font-medium mb-1">Category</label>
             <select
@@ -270,9 +137,6 @@ function DashBoard() {
                 setPage(1);
               }}
             >
-              {/* <option value="" onClick={() => setData(fil)}>
-                All
-              </option> */}
               {uniqCategory.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
@@ -280,8 +144,6 @@ function DashBoard() {
               ))}
             </select>
           </div>
-
-          {/* Search */}
           <div>
             <label className="block text-sm font-medium mb-1">
               Search Title
@@ -296,8 +158,6 @@ function DashBoard() {
           </div>
         </div>
       </div>
-
-      {/* Product List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {data.length === 0 ? (
           <p className="text-center text-gray-500 col-span-full">
@@ -324,8 +184,6 @@ function DashBoard() {
           ))
         )}
       </div>
-
-      {/* Pagination */}
       <div className="flex justify-between items-center mt-6">
         <button
           className={`px-4 py-2 rounded-lg bg-blue-600 text-white ${

@@ -36,7 +36,6 @@ function Login() {
         }
       );
       if (loginData.data) {
-        debugger;
         if (loginData.data?.statusCode == "200") {
           localStorage.setItem(
             "accessToke",
