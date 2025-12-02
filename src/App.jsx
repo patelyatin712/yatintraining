@@ -1,4 +1,3 @@
-import "./App.css";
 import Login from "./pages/Login";
 import { Navigate, Route, Router, Routes, useNavigate } from "react-router";
 import Home from "./pages/Home";
@@ -11,6 +10,7 @@ function App() {
     <>
       <ToastContainer />
       {/* <Navbar /> */}
+      {} <Navbar />
       <Routes>
         <Route
           path="/login"
@@ -22,9 +22,14 @@ function App() {
             )
           }
         />
+
         <Route path="/dashboard" element={<DashBoard />} />
-        <Route path="/navbar" element={<Navbar />} />
-        <Route element={<AuthGuard />}>
+        {/* <Route path="/navbar" element={<Navbar />} /> */}
+
+        <Route
+
+        // element={<AuthGuard />}
+        >
           <Route
             path="/*"
             element={
